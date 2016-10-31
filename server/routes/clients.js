@@ -13,23 +13,23 @@ router.route('/')
       dbQuery.where('gender').equals(gender);
     }
     if(minage) {
-      dbQuery.where('age').gt(minage);
+      dbQuery.where('age').gt(Number(minage));
     }
     if(maxage) {
-      dbQuery.where('age').lt(maxage);
+      dbQuery.where('age').lt(Number(maxage));
     }
     if(visitafter) {
-      dbQuery.where('age').gt(new Date(visitafter).getTime());
+      dbQuery.where('lastVisit').gt(new Date(visitafter).getTime());
     }
     if(visitbefore) {
-      dbQuery.where('age').lt(new Date(visitbefore).getTime());
+      dbQuery.where('lastVisit').lt(new Date(visitbefore).getTime());
     }
     if(allergy) {
-      dbQuery.where('allergy').equals(allergy);
+      dbQuery.where('allergies').equals(allergy);
     }
     if(page) {
       if(!pagesize) pagesize = 20;
-      dbQuery.skip((page - 1) * pagesize).limit(Number(pagesize));
+      dbQuery.skip((Number(page) - 1) * Number(pagesize)).limit(Number(pagesize));
     }
 
     dbQuery
