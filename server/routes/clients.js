@@ -1,5 +1,5 @@
 const express = require('express');
-
+const moment = require('moment');
 const router = new express.Router();
 
 const Client = require('../models/client');
@@ -26,6 +26,7 @@ router.route('/')
     }
     if(page) {
       if(!pagesize) pagesize = 20;
+      if(!page) page = 1;
       dbQuery.skip((Number(page) - 1) * Number(pagesize)).limit(Number(pagesize));
     }
     if(allergy) {
