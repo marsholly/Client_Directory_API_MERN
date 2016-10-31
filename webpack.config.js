@@ -5,8 +5,8 @@ module.exports = {
   debug: true,
   entry: [
     './node_modules/bootstrap-loader',
-    './src/css/style.css',
-    './src/index.js',
+    // './src/css/style.css',
+    // './src/index.js',
     'webpack-hot-middleware/client?reload=true',
   ],
   target: 'web',

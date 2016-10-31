@@ -19,16 +19,17 @@ router.route('/')
       dbQuery.where('age').lt(maxage);
     }
     if(visitafter) {
-      dbQuery.where('age').gt(visitafter.getTime());
+      dbQuery.where('age').gt(new Date(visitafter).getTime());
     }
     if(visitbefore) {
-      dbQuery.where('age').lt(visitbefore.getTime());
+      dbQuery.where('age').lt(new Date(visitbefore).getTime());
     }
     if(allergy) {
       dbQuery.where('allergy').equals(allergy);
     }
-    if(page && pagesize) {
-      dbQuery.skip((page - 1) * pagesize).limit(pagesize);
+    if(page) {
+      if(!pagesize) pagesize = 20;
+      dbQuery.skip((page - 1) * pagesize).limit(Number(pagesize));
     }
 
     dbQuery
