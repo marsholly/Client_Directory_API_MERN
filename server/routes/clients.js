@@ -1,5 +1,4 @@
 const express = require('express');
-const moment = require('moment');
 const router = new express.Router();
 
 const Client = require('../models/client');
@@ -19,10 +18,10 @@ router.route('/')
       dbQuery.where('age').lte(Number(maxage));
     }
     if(visitafter) {
-      dbQuery.where('lastVisit').gt(new Date(visitafter).getTime());
+      dbQuery.where('lastVisit').gt(visitafter);
     }
     if(visitbefore) {
-      dbQuery.where('lastVisit').lt(new Date(visitbefore).getTime());
+      dbQuery.where('lastVisit').lt(visitbefore);
     }
     if(page) {
       if(!pagesize) pagesize = 20;

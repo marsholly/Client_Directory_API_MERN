@@ -8,7 +8,7 @@ const clientSchema = new mongoose.Schema({
   age: {type: Number, min: 0, max: 120 },
   allergies: [{ type: String }],
   gender: { type: String, enum: ["male", "female"] },
-  lastVisit: { type: Date, max: Date.now },
+  lastVisit: { type: Date, max: Date.now() },
 });
 
 const Client = mongoose.model('Client', clientSchema);
