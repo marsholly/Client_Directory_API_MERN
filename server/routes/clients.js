@@ -13,10 +13,10 @@ router.route('/')
       dbQuery.where('gender').equals(gender);
     }
     if(minage) {
-      dbQuery.where('age').gt(Number(minage));
+      dbQuery.where('age').gte(Number(minage));
     }
     if(maxage) {
-      dbQuery.where('age').lt(Number(maxage));
+      dbQuery.where('age').lte(Number(maxage));
     }
     if(visitafter) {
       dbQuery.where('lastVisit').gt(new Date(visitafter).getTime());
@@ -24,17 +24,18 @@ router.route('/')
     if(visitbefore) {
       dbQuery.where('lastVisit').lt(new Date(visitbefore).getTime());
     }
-    if(allergy) {
-      dbQuery.where('allergies').equals(allergy);
-    }
     if(page) {
       if(!pagesize) pagesize = 20;
       dbQuery.skip((Number(page) - 1) * Number(pagesize)).limit(Number(pagesize));
+    }
+    if(allergy) {
+      dbQuery.where('allergies').in([allergy]);
     }
 
     dbQuery
       .then(clients => res.send(clients))
       .catch(err => res.status(400).send(err));
+
   })
   .post((req, res) => {
     Client.create(req.body)
