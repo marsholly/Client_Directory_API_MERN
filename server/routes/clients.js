@@ -8,7 +8,7 @@ router.route('/')
   .get((req, res) => {
     let dbQuery = Client.find({})
     let { pagesize, page, gender, minage, maxage, visitafter, visitbefore, allergy } = req.query;
-    
+
     if(gender) {
       dbQuery.where('gender').equals(gender);
     }
@@ -19,10 +19,10 @@ router.route('/')
       dbQuery.where('age').lt(maxage);
     }
     if(visitafter) {
-      dbQuery.where('age').gt(visitafter);
+      dbQuery.where('age').gt(visitafter.getTime());
     }
     if(visitbefore) {
-      dbQuery.where('age').lt(visitbefore);
+      dbQuery.where('age').lt(visitbefore.getTime());
     }
     if(allergy) {
       dbQuery.where('allergy').equals(allergy);
